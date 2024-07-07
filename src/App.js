@@ -16,9 +16,10 @@ function App() {
   return (
     <Provider store={store}>
 
-    <AuthProvider>
 
     <BrowserRouter>
+    <AuthProvider>
+
     <div className=' fixed w-[100%] top-0 z-10'>    <Navbar />
 </div>
 <div className='mt-[110px]'>
@@ -32,8 +33,9 @@ function App() {
     </Routes>
     <Footer />
     </div>
+    </AuthProvider>
+
     </BrowserRouter>
-        </AuthProvider>
         </Provider>
 
 

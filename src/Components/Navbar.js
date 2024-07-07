@@ -9,7 +9,7 @@ import { auth } from '../Components/Auth/firebase'; // Adjust the path to your f
 const Navbar = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [showsign, setShowSign] = useState(false);
-  const { user } = useAuth();
+  const { user,logout } = useAuth();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -36,8 +36,9 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     try {
-      await signOut(auth);
-      navigate('/login');
+      localStorage.removeItem('token'); // Remove token from localStorage
+      logout();
+      // navigate('/login');
     } catch (error) {
       console.error('Failed to log out:', error.message);
     }
@@ -106,7 +107,7 @@ const Navbar = () => {
                 {user === null ? (
                   <Link className="ml-1" to={"/login"}>Sign In</Link>
                 ) : (
-                  <span>{console.log(user)}{user.displayName || user.email || user.phoneNumber}</span> // Ensure this doesn't throw an error
+                  <span>{console.log(user)}{user?.displayName || user?.email || user?.phoneNumber||user}</span> // Ensure this doesn't throw an error
                 )}
               </span>
               {showsign && (
